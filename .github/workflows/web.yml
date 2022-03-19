@@ -13,13 +13,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           lfs: true
-
-      - name: Setup Templates
-        run: ./scripts/prepare-templates.sh
-
-      - name: Build
-        run: ./scripts/build-channel.sh web
-
+      - run: ./scripts/prepare-templates.sh
+      - run: ./scripts/build-channel.sh web
+      - run: apt-get update && apt-get install -y rsync
       - uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           BRANCH: gh-pages
