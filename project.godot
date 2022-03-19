@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
+"base": "Node",
+"class": "InputReader",
+"language": "GDScript",
+"path": "res://src/InputReader.gd"
+}, {
 "base": "Reference",
 "class": "Logger",
 "language": "GDScript",
@@ -58,6 +63,7 @@ _global_script_class_icons={
 "ArgumentParser": "",
 "CSSParser": "",
 "CSSSimplifier": "",
+"InputReader": "",
 "Logger": "",
 "OptParse": "",
 "Options": "",
