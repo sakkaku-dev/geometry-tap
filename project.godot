@@ -88,6 +88,11 @@ config/icon="res://icon.png"
 
 window/size/width=1080
 window/size/height=1920
+window/handheld/orientation="portrait"
+
+[global]
+
+window=false
 
 [gui]
 
