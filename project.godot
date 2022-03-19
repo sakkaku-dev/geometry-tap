@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
 "base": "Reference",
+"class": "Logger",
+"language": "GDScript",
+"path": "res://src/Logger.gd"
+}, {
+"base": "Reference",
 "class": "OptParse",
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/optparse.gd"
@@ -43,20 +48,27 @@ _global_script_classes=[ {
 "class": "ThemeApplier",
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/ThemeApplier.gd"
+}, {
+"base": "Node",
+"class": "UnitTest",
+"language": "GDScript",
+"path": "res://tests/UnitTest.gd"
 } ]
 _global_script_class_icons={
 "ArgumentParser": "",
 "CSSParser": "",
 "CSSSimplifier": "",
+"Logger": "",
 "OptParse": "",
 "Options": "",
 "Stylesheet": "",
-"ThemeApplier": ""
+"ThemeApplier": "",
+"UnitTest": ""
 }
 
 [application]
 
-config/name="##VAR_GAME_NAME"
+config/name="geometry-tap"
 config/icon="res://icon.png"
 
 [gui]
