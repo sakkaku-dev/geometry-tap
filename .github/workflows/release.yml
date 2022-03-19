@@ -23,9 +23,7 @@ jobs:
           lfs: true
 
       - name: Setup Templates
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+        run: ./scripts/prepare-templates.sh
 
       - name: Prepare android release
         env:
@@ -44,11 +42,7 @@ jobs:
           sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
 
       - name: Build
-        run: |
-          mkdir ~/.config
-          cp /root/.config/godot ~/.config -r
-          mkdir -v -p build/$CHANNEL
-          godot -v --export $CHANNEL
+        run: ./scripts/build-channel.sh $CHANNEL
 
       - name: Publish Itch
         if: env.BUTLER_API_KEY && env.GAME && !contains(github.ref, '-pre')
