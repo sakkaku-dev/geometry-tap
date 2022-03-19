@@ -1,11 +1,18 @@
-extends KinematicBody2D
+class_name Geometry extends KinematicBody2D
 
 export var speed = 300
 
+var moved = false
+var direction = Vector2.DOWN
 var logger = Logger.new("Geometry")
 
+func move(dir: Vector2):
+	direction = dir
+	moved = true
+	speed = 2000
+
 func _physics_process(delta: float):
-	var velocity = Vector2.DOWN * speed
+	var velocity = direction * speed
 	move_and_slide(velocity)
 
 
