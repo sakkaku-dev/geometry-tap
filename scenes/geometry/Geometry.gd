@@ -1,6 +1,6 @@
 class_name Geometry extends KinematicBody2D
 
-export var speed = 300
+export var speed = 500
 
 var moved = false
 var direction = Vector2.DOWN
