@@ -10,14 +10,14 @@ func before_each():
 
 
 func test_mouse_swipe_right():
-	input._unhandled_input(mouse_button_event(BUTTON_LEFT, Vector2(0, 0)))
-	input._unhandled_input(mouse_button_event(BUTTON_LEFT, Vector2(20, 0), false))
+	input._input(mouse_button_event(BUTTON_LEFT, Vector2(0, 0)))
+	input._input(mouse_button_event(BUTTON_LEFT, Vector2(20, 0), false))
 	
 	assert_signal_emitted_with_parameters(input, "swipe", [false])
 
 
 func test_mouse_swipe_left():
-	input._unhandled_input(mouse_button_event(BUTTON_LEFT, Vector2(0, 0)))
-	input._unhandled_input(mouse_button_event(BUTTON_LEFT, Vector2(-20, 0), false))
+	input._input(mouse_button_event(BUTTON_LEFT, Vector2(0, 0)))
+	input._input(mouse_button_event(BUTTON_LEFT, Vector2(-20, 0), false))
 	
 	assert_signal_emitted_with_parameters(input, "swipe", [true])

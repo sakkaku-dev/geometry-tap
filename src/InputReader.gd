@@ -6,7 +6,8 @@ export var swipe_threshold = 100
 
 var swipe_start
 
-func _unhandled_input(event: InputEvent):
+
+func _input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.is_pressed():

@@ -1,19 +1,19 @@
 extends Node2D
 
 onready var geometries := $Geometries
-onready var outlines := $Outlines
+onready var outlines_rect: Control = $CanvasLayer/Control/MarginContainer/ColorRect
 
 var logger = Logger.new("Main")
 
 func get_current_geometry() -> Geometry:
-	var outlines_threshold = 200
+#	var outlines_threshold = 200
+#	var outlines_min = outlines.rect_global_position.y - outlines_threshold
+#	var outlines_max = outlines.rect_global_position.y + outlines_threshold
+	
+	var rect = Rect2(outlines_rect.rect_global_position, outlines_rect.rect_size)
 	
 	for child in geometries.get_children():
-		var outlines_min = outlines.global_position.y - outlines_threshold
-		var outlines_max = outlines.global_position.y + outlines_threshold
-		var child_y = child.global_position.y
-		
-		if not child.moved and child_y > outlines_min and child_y < outlines_max:
+		if not child.moved and rect.has_point(child.global_position):
 			return child
 	return null
 

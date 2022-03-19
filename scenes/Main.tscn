@@ -18,15 +18,54 @@ parent_path = NodePath("../Geometries")
 [node name="InputReader" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="Outlines" type="Node2D" parent="."]
-position = Vector2( 540, 1700 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Square" type="Sprite" parent="Outlines"]
-position = Vector2( -300, 0 )
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -600.0
+custom_constants/margin_top = 100
+custom_constants/margin_bottom = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/MarginContainer"]
+margin_top = 100.0
+margin_right = 1080.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 400 )
+color = Color( 0, 0, 0, 0.156863 )
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/MarginContainer"]
+margin_top = 100.0
+margin_right = 1080.0
+margin_bottom = 500.0
+
+[node name="Outlines" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/CenterContainer"]
+margin_left = 160.0
+margin_top = 110.0
+margin_right = 920.0
+margin_bottom = 290.0
+custom_constants/separation = 400
+
+[node name="Square" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/CenterContainer/Outlines"]
+margin_right = 180.0
+margin_bottom = 180.0
 texture = ExtResource( 4 )
 
-[node name="Circle" type="Sprite" parent="Outlines"]
-position = Vector2( 300, 0 )
+[node name="Circle" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/CenterContainer/Outlines"]
+margin_left = 580.0
+margin_right = 760.0
+margin_bottom = 180.0
 texture = ExtResource( 5 )
 
 [connection signal="swipe" from="InputReader" to="." method="_on_InputReader_swipe"]
