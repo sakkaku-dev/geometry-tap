@@ -2,6 +2,7 @@ class_name Geometry extends KinematicBody2D
 
 export var speed = 500
 
+var matched = false
 var moved = false
 var direction = Vector2.DOWN
 var logger = Logger.new("Geometry")
@@ -18,4 +19,7 @@ func _physics_process(delta: float):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	logger.info("Remove geometry: %s" % name)
+	if not matched:
+		ScoreManager.missed()
+		logger.info("Missed geometry")
 	queue_free()

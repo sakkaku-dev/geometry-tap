@@ -1,15 +1,14 @@
 extends Node2D
 
-onready var score_label: Label = $CanvasLayer/Control/TopBar/Score
+onready var score_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/Score
 onready var geometries: Node2D = $Geometries
 onready var outlines_rect: Control = $CanvasLayer/Control/MarginContainer/ColorRect
 onready var outlines: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/Outlines
 
 var logger = Logger.new("Main")
-var score = 0
 
 func _ready():
-	_increase_score(0)
+	ScoreManager.connect("score_updated", self, "_update_score")
 
 func _get_close_enough_geometry() -> Geometry:
 #	var outlines_threshold = 200
@@ -23,17 +22,19 @@ func _get_close_enough_geometry() -> Geometry:
 			return child
 	return null
 
+
 func _get_outline_for_direction(dir: Vector2) -> Control:
 	for child in outlines.get_children():
 		var child_pos_dir = _center_pos(outlines).direction_to(_center_pos(child))
 		var dir_unit = dir.normalized()
-		print(dir_unit.dot(child_pos_dir))
 		if dir_unit.dot(child_pos_dir) == 1:
 			return child
 	return null
 
+
 func _center_pos(ctrl: Control) -> Vector2:
 	return ctrl.rect_global_position + ctrl.rect_size / 2
+
 
 func _on_InputReader_swipe(left):
 	var new_dir = Vector2.LEFT if left else Vector2.RIGHT
@@ -45,8 +46,9 @@ func _on_InputReader_swipe(left):
 		
 		if matching_outline:
 			if matching_outline.name in geometry.name:
+				geometry.match = true
 				logger.info("Correct match")
-				_increase_score()
+				ScoreManager.increase_score(1)
 			else:
 				logger.info("Wrong match")
 		else:
@@ -55,6 +57,6 @@ func _on_InputReader_swipe(left):
 	else:
 		logger.info("No geometry close enough")
 
-func _increase_score(increment = 1):
-	score += increment
+
+func _update_score(score):
 	score_label.text = str(score)
