@@ -43,25 +43,25 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1060.0
-margin_bottom = 37.0
+margin_bottom = 85.0
 
 [node name="HealthBar" parent="CanvasLayer/Control/TopBar/HBoxContainer" instance=ExtResource( 7 )]
 margin_right = 0.0
-margin_bottom = 17.0
+margin_bottom = 65.0
 
 [node name="Control" type="Control" parent="CanvasLayer/Control/TopBar/HBoxContainer"]
 margin_left = 4.0
-margin_right = 1027.0
-margin_bottom = 17.0
+margin_right = 999.0
+margin_bottom = 65.0
 size_flags_horizontal = 3
 
 [node name="Score" type="Label" parent="CanvasLayer/Control/TopBar/HBoxContainer"]
-margin_left = 1031.0
+margin_left = 1003.0
 margin_right = 1040.0
-margin_bottom = 17.0
+margin_bottom = 65.0
 text = "0"
 script = ExtResource( 6 )
-relative_font_size = 8.0
+relative_font_size = 2.0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
 anchor_top = 1.0
@@ -104,4 +104,52 @@ margin_right = 760.0
 margin_bottom = 180.0
 texture = ExtResource( 5 )
 
+[node name="GameOver" type="Control" parent="CanvasLayer/Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/GameOver/CenterContainer"]
+margin_left = 360.0
+margin_top = 855.0
+margin_right = 720.0
+margin_bottom = 1064.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 65.0
+text = "Game Over"
+
+[node name="FinalScore" type="Label" parent="CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer"]
+margin_top = 69.0
+margin_right = 360.0
+margin_bottom = 134.0
+text = "Final Score"
+
+[node name="Retry" type="Button" parent="CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer"]
+margin_top = 138.0
+margin_right = 360.0
+margin_bottom = 209.0
+text = "Play Again"
+
 [connection signal="swipe" from="InputReader" to="." method="_on_InputReader_swipe"]
+[connection signal="zero_health" from="CanvasLayer/Control/TopBar/HBoxContainer/HealthBar" to="." method="_on_HealthBar_zero_health"]
+[connection signal="pressed" from="CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer/Retry" to="." method="_on_Retry_pressed"]

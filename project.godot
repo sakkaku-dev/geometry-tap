@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/geometry/Geometry.gd"
 }, {
+"base": "Node2D",
+"class": "GeometrySpawner",
+"language": "GDScript",
+"path": "res://scenes/geometry/GeometrySpawner.gd"
+}, {
+"base": "Control",
+"class": "HealthBar",
+"language": "GDScript",
+"path": "res://scenes/health/HealthBar.gd"
+}, {
 "base": "Node",
 "class": "InputReader",
 "language": "GDScript",
@@ -69,6 +79,8 @@ _global_script_class_icons={
 "CSSParser": "",
 "CSSSimplifier": "",
 "Geometry": "",
+"GeometrySpawner": "",
+"HealthBar": "",
 "InputReader": "",
 "Logger": "",
 "OptParse": "",

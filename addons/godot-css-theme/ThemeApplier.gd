@@ -39,15 +39,20 @@ func _apply_to_theme(theme: Theme, stylesheet: Stylesheet, class_group: String) 
 						var output = url.split(".")[0]
 						ResourceSaver.save(output + ".tres", font)
 
-					if properties.has("font-size"):
-						var size = properties.get("font-size")
-						font.set("size", size)
-						if _debug:
-							print("Set font size: %s" % size)
+						font = load(output + ".tres")
 
 					theme.set("default_font", font)
 					if _debug:
 						print("Set default font: %s" % url)
+
+			# Doesn't work?
+			if properties.has("font-size"):
+				var font = theme.get("default_font")
+				var size = properties.get("font-size")
+				font.set("size", size)
+				print(font.get("size"))
+				if _debug:
+					print("Set font size: %s" % size)
 
 			continue
 

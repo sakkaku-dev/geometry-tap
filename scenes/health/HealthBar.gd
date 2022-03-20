@@ -1,6 +1,6 @@
-extends Control
+class_name HealthBar extends Control
 
-signal zero_health
+signal zero_health()
 
 export var initial_health := 3
 
@@ -24,3 +24,6 @@ func _update_health(delta: int):
 
 	if health <= 0:
 		emit_signal("zero_health")
+
+func reset_health():
+	_update_health(initial_health - health)

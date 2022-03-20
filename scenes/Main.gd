@@ -2,13 +2,29 @@ extends Node2D
 
 onready var score_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/Score
 onready var geometries: Node2D = $Geometries
+onready var spawner: GeometrySpawner = $GeometrySpawner
+onready var health_bar: HealthBar = $CanvasLayer/Control/TopBar/HBoxContainer/HealthBar
 onready var outlines_rect: Control = $CanvasLayer/Control/MarginContainer/ColorRect
 onready var outlines: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/Outlines
+
+onready var game_over: Control = $CanvasLayer/Control/GameOver
+onready var final_score: Label = $CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer/FinalScore
 
 var logger = Logger.new("Main")
 
 func _ready():
+	_start_game()
 	ScoreManager.connect("score_updated", self, "_update_score")
+
+func _start_game():
+	game_over.hide()
+	for child in geometries.get_children():
+		child.matched = true
+		geometries.remove_child(child)
+	spawner.start_timer(1)
+	health_bar.reset_health()
+	ScoreManager.reset_score()
+	get_tree().paused = false
 
 func _get_close_enough_geometry() -> Geometry:
 #	var outlines_threshold = 200
@@ -46,7 +62,7 @@ func _on_InputReader_swipe(left):
 		
 		if matching_outline:
 			if matching_outline.name in geometry.name:
-				geometry.match = true
+				geometry.matched = true
 				logger.info("Correct match")
 				ScoreManager.increase_score(1)
 			else:
@@ -60,3 +76,14 @@ func _on_InputReader_swipe(left):
 
 func _update_score(score):
 	score_label.text = str(score)
+
+
+func _on_HealthBar_zero_health():
+	game_over.show()
+	final_score.text = "Final Score: %s" % ScoreManager.score
+	get_tree().paused = true
+
+
+func _on_Retry_pressed():
+	logger.info("Restart game")
+	_start_game()
