@@ -1,11 +1,17 @@
 extends Node2D
 
-onready var geometries := $Geometries
+onready var score_label: Label = $CanvasLayer/Control/TopBar/Score
+onready var geometries: Node2D = $Geometries
 onready var outlines_rect: Control = $CanvasLayer/Control/MarginContainer/ColorRect
+onready var outlines: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/Outlines
 
 var logger = Logger.new("Main")
+var score = 0
 
-func get_current_geometry() -> Geometry:
+func _ready():
+	_increase_score(0)
+
+func _get_close_enough_geometry() -> Geometry:
 #	var outlines_threshold = 200
 #	var outlines_min = outlines.rect_global_position.y - outlines_threshold
 #	var outlines_max = outlines.rect_global_position.y + outlines_threshold
@@ -17,12 +23,38 @@ func get_current_geometry() -> Geometry:
 			return child
 	return null
 
+func _get_outline_for_direction(dir: Vector2) -> Control:
+	for child in outlines.get_children():
+		var child_pos_dir = _center_pos(outlines).direction_to(_center_pos(child))
+		var dir_unit = dir.normalized()
+		print(dir_unit.dot(child_pos_dir))
+		if dir_unit.dot(child_pos_dir) == 1:
+			return child
+	return null
+
+func _center_pos(ctrl: Control) -> Vector2:
+	return ctrl.rect_global_position + ctrl.rect_size / 2
+
 func _on_InputReader_swipe(left):
 	var new_dir = Vector2.LEFT if left else Vector2.RIGHT
 	logger.info("Swipe: %s" % new_dir)
 	
-	var geometry = get_current_geometry()
+	var geometry = _get_close_enough_geometry()
 	if geometry:
+		var matching_outline = _get_outline_for_direction(new_dir)
+		
+		if matching_outline:
+			if matching_outline.name in geometry.name:
+				logger.info("Correct match")
+				_increase_score()
+			else:
+				logger.info("Wrong match")
+		else:
+			logger.info("No matching outline found for %s" % new_dir)
 		geometry.move(new_dir)
 	else:
 		logger.info("No geometry close enough")
+
+func _increase_score(increment = 1):
+	score += increment
+	score_label.text = str(score)
