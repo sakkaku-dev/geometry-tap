@@ -20,7 +20,7 @@ func _update_health(delta: int):
 	health += delta
 	health_tex.rect_size.x = max(health_size.x * health, 0)
 
-	logger.info("Setting health to %s" % health)
+	logger.debug("Setting health to %s" % health)
 
 	if health <= 0:
 		emit_signal("zero_health")

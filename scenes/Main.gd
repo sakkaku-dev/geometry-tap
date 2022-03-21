@@ -68,7 +68,7 @@ func _get_outline_score_for(geometry) -> OutlineScore:
 
 func _on_InputReader_swipe(left):
 	var new_dir = Vector2.LEFT if left else Vector2.RIGHT
-	logger.info("Swipe: %s" % new_dir)
+	logger.debug("Swipe: %s" % new_dir)
 	
 	var geometry = _get_close_enough_geometry()
 	if geometry:
@@ -80,18 +80,18 @@ func _on_InputReader_swipe(left):
 				if closest_outline_score:
 					geometry.matched = true
 					var score_type = closest_outline_score.score
-					logger.info("Correct match: %s" % score_type)
+					logger.debug("Correct match: %s" % score_type)
 					ScoreManager.increase_score(score_type)
 					score_type_label.update_score(score_type)
 				else:
-					logger.info("Outline matched but did not score")
+					logger.debug("Outline matched but did not score")
 			else:
-				logger.info("Wrong match")
+				logger.debug("Wrong match")
 		else:
-			logger.info("No matching outline found for %s" % new_dir)
+			logger.debug("No matching outline found for %s" % new_dir)
 		geometry.move(new_dir)
 	else:
-		logger.info("No geometry close enough")
+		logger.debug("No geometry close enough")
 
 
 func _update_score(score):

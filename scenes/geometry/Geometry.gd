@@ -18,8 +18,6 @@ func _physics_process(delta: float):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	logger.info("Remove geometry: %s" % name)
 	if not matched:
 		ScoreManager.missed()
-		logger.info("Missed geometry")
 	queue_free()
