@@ -1,11 +1,14 @@
 extends Node2D
 
 onready var score_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/Score
+onready var score_type_label: ScoreType = $CanvasLayer/Control/CenterContainer/ScoreType
+
 onready var geometries: Node2D = $Geometries
 onready var spawner: GeometrySpawner = $GeometrySpawner
 onready var health_bar: HealthBar = $CanvasLayer/Control/TopBar/HBoxContainer/HealthBar
-onready var outlines_rect: Control = $CanvasLayer/Control/MarginContainer/ColorRect
+
 onready var outlines: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/Outlines
+onready var outline_scores: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/OutlineScores
 
 onready var game_over: Control = $CanvasLayer/Control/GameOver
 onready var final_score: Label = $CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer/FinalScore
@@ -15,6 +18,7 @@ var logger = Logger.new("Main")
 func _ready():
 	_start_game()
 	ScoreManager.connect("score_updated", self, "_update_score")
+
 
 func _start_game():
 	game_over.hide()
@@ -26,15 +30,16 @@ func _start_game():
 	ScoreManager.reset_score()
 	get_tree().paused = false
 
+
 func _get_close_enough_geometry() -> Geometry:
-#	var outlines_threshold = 200
+	var outlines_threshold = 200
 #	var outlines_min = outlines.rect_global_position.y - outlines_threshold
-#	var outlines_max = outlines.rect_global_position.y + outlines_threshold
+	var outlines_max = _center_pos(outlines).y + outlines_threshold
 	
-	var rect = Rect2(outlines_rect.rect_global_position, outlines_rect.rect_size)
+#	var rect = Rect2(outlines_rect.rect_global_position, outlines_rect.rect_size)
 	
 	for child in geometries.get_children():
-		if not child.moved and rect.has_point(child.global_position):
+		if not child.moved and child.global_position.y < outlines_max:
 			return child
 	return null
 
@@ -52,6 +57,15 @@ func _center_pos(ctrl: Control) -> Vector2:
 	return ctrl.rect_global_position + ctrl.rect_size / 2
 
 
+func _get_outline_score_for(geometry) -> OutlineScore:
+	# Assuming smaller outlines are the first children
+	for child in outline_scores.get_children():
+		var rect = Rect2(child.rect_global_position, child.rect_size)
+		if rect.has_point(geometry.global_position):
+			return child
+	
+	return null
+
 func _on_InputReader_swipe(left):
 	var new_dir = Vector2.LEFT if left else Vector2.RIGHT
 	logger.info("Swipe: %s" % new_dir)
@@ -62,9 +76,15 @@ func _on_InputReader_swipe(left):
 		
 		if matching_outline:
 			if matching_outline.name in geometry.name:
-				geometry.matched = true
-				logger.info("Correct match")
-				ScoreManager.increase_score(1)
+				var closest_outline_score = _get_outline_score_for(geometry)
+				if closest_outline_score:
+					geometry.matched = true
+					var score_type = closest_outline_score.score
+					logger.info("Correct match: %s" % score_type)
+					ScoreManager.increase_score(score_type)
+					score_type_label.update_score(score_type)
+				else:
+					logger.info("Outline matched but did not score")
 			else:
 				logger.info("Wrong match")
 		else:

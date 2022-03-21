@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/score/ScoreType.gd" type="Script" id=1]
+
+[node name="ScoreType" type="Label"]
+margin_left = 351.0
+margin_top = 927.0
+margin_right = 728.0
+margin_bottom = 992.0
+text = "SCORE_TYPE"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

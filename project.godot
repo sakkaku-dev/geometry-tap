@@ -59,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/Options.gd"
 }, {
+"base": "Control",
+"class": "OutlineScore",
+"language": "GDScript",
+"path": "res://scenes/score/OutlineScore.gd"
+}, {
+"base": "Label",
+"class": "ScoreType",
+"language": "GDScript",
+"path": "res://scenes/score/ScoreType.gd"
+}, {
 "base": "Reference",
 "class": "Stylesheet",
 "language": "GDScript",
@@ -85,6 +95,8 @@ _global_script_class_icons={
 "Logger": "",
 "OptParse": "",
 "Options": "",
+"OutlineScore": "",
+"ScoreType": "",
 "Stylesheet": "",
 "ThemeApplier": "",
 "UnitTest": ""
