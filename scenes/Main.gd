@@ -1,7 +1,8 @@
 extends Node2D
 
-onready var score_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/Score
+onready var score_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/VBoxContainer/Score
 onready var score_type_label: ScoreType = $CanvasLayer/Control/CenterContainer/ScoreType
+onready var combo_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/VBoxContainer/Combo
 
 onready var geometries: Node2D = $Geometries
 onready var spawner: GeometrySpawner = $GeometrySpawner
@@ -18,6 +19,7 @@ var logger = Logger.new("Main")
 func _ready():
 	_start_game()
 	ScoreManager.connect("score_updated", self, "_update_score")
+	ScoreManager.connect("combo_updated", self, "_update_combo")
 
 
 func _start_game():
@@ -96,6 +98,10 @@ func _on_InputReader_swipe(left):
 
 func _update_score(score):
 	score_label.text = str(score)
+
+
+func _update_combo(combo):
+	combo_label.text = str(combo) + "x"
 
 
 func _on_HealthBar_zero_health():

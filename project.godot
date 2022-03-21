@@ -110,7 +110,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ScoreManager="*res://scenes/autoload/ScoreManager.gd"
+ScoreManager="*res://scenes/score/ScoreManager.gd"
 
 [display]
 
