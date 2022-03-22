@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/Main.gd" type="Script" id=3]
 [ext_resource path="res://scenes/square_outline.png" type="Texture" id=4]
 [ext_resource path="res://scenes/circle_outline.png" type="Texture" id=5]
-[ext_resource path="res://src/ThemeOverride.gd" type="Script" id=6]
+[ext_resource path="res://default_env.tres" type="Environment" id=6]
 [ext_resource path="res://scenes/health/HealthBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/score/ScoreType.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/score/OutlineScore.gd" type="Script" id=9]
@@ -87,8 +87,6 @@ margin_right = 69.0
 margin_bottom = 65.0
 text = "0"
 align = 2
-script = ExtResource( 6 )
-relative_font_size = 2.0
 
 [node name="Combo" type="Label" parent="CanvasLayer/Control/TopBar/HBoxContainer/VBoxContainer"]
 margin_top = 69.0
@@ -213,6 +211,9 @@ margin_top = 138.0
 margin_right = 360.0
 margin_bottom = 209.0
 text = "Play Again"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 6 )
 
 [connection signal="swipe" from="InputReader" to="." method="_on_InputReader_swipe"]
 [connection signal="zero_health" from="CanvasLayer/Control/TopBar/HBoxContainer/HealthBar" to="." method="_on_HealthBar_zero_health"]
