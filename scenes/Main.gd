@@ -27,7 +27,7 @@ func _start_game():
 	for child in geometries.get_children():
 		child.matched = true
 		geometries.remove_child(child)
-	spawner.start_timer(1)
+	spawner.start_timer()
 	health_bar.reset_health()
 	ScoreManager.reset_score()
 	get_tree().paused = false

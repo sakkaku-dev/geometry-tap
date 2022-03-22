@@ -5,6 +5,7 @@ onready var parent: Node2D = get_node(parent_path)
 
 export var geometries: Array
 export var initial_speed = 500
+export var initial_spawn_time = 1.0
 
 export var delay_min = 1
 export var delay_max = 3
@@ -12,7 +13,8 @@ export var delay_max = 3
 onready var spawn_timer: Timer = $SpawnTimer
 onready var delay_timer: Timer = $DelayTimer
 
-onready var speed = initial_speed
+var speed = 0
+var new_speed = 0
 var spawn_time = 1
 var subsequent_spawned_total = 0
 var random = RandomNumberGenerator.new()
@@ -24,17 +26,21 @@ func _ready():
 
 
 func _on_score_updated(score: int) -> void:
-	pass
-#	speed = initial_speed * max(1, (score / 10.0))
-#	spawn_time = 1 / max(float(score), 1)
+	new_speed = min(2000, initial_speed + max(1, score / 10))
+	spawn_time = max(1 / (speed / (initial_speed * 1.0)), 0.5)
+	logger.info("Setting new speed and time: %s / %ss" % [new_speed, spawn_time])
 
 
-func start_timer(start_time: float) -> void:
-	spawn_time = start_time
-	spawn_timer.start(start_time)
+func start_timer() -> void:
+	subsequent_spawned_total = 0
+	speed = initial_speed
+	new_speed = speed
+	spawn_time = initial_spawn_time
+	spawn_timer.start(spawn_time)
 
 
 func _on_DelayTimer_timeout():
+	speed = new_speed
 	spawn_timer.start(spawn_time)
 	logger.debug("Spawning in %s seconds" % spawn_time)
 
