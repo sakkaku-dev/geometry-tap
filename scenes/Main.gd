@@ -8,8 +8,9 @@ onready var geometries: Node2D = $Geometries
 onready var spawner: GeometrySpawner = $GeometrySpawner
 onready var health_bar: HealthBar = $CanvasLayer/Control/TopBar/HBoxContainer/HealthBar
 
-onready var outlines: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/Outlines
-onready var outline_scores: Control = $CanvasLayer/Control/MarginContainer/CenterContainer/OutlineScores
+onready var camera: MainCamera = $Camera2D
+onready var outlines: Node2D = $GeometrySpawner/Outlines
+onready var outline_scores: Node2D = $GeometrySpawner/Outlines/OutlineScores
 
 onready var game_over: Control = $CanvasLayer/Control/GameOver
 onready var final_score: Label = $CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer/FinalScore
@@ -20,6 +21,7 @@ func _ready():
 	_start_game()
 	ScoreManager.connect("score_updated", self, "_update_score")
 	ScoreManager.connect("combo_updated", self, "_update_combo")
+	ScoreManager.connect("geometry_missed", self, "_on_geometry_missed")
 
 
 func _start_game():
@@ -36,7 +38,7 @@ func _start_game():
 func _get_close_enough_geometry() -> Geometry:
 	var outlines_threshold = 200
 #	var outlines_min = outlines.rect_global_position.y - outlines_threshold
-	var outlines_max = _center_pos(outlines).y + outlines_threshold
+	var outlines_max = outlines.global_position.y + outlines_threshold
 	
 #	var rect = Rect2(outlines_rect.rect_global_position, outlines_rect.rect_size)
 	
@@ -48,15 +50,11 @@ func _get_close_enough_geometry() -> Geometry:
 
 func _get_outline_for_direction(dir: Vector2) -> Control:
 	for child in outlines.get_children():
-		var child_pos_dir = _center_pos(outlines).direction_to(_center_pos(child))
+		var child_pos_dir = outlines.global_position.direction_to(child.global_position)
 		var dir_unit = dir.normalized()
 		if dir_unit.dot(child_pos_dir) == 1:
 			return child
 	return null
-
-
-func _center_pos(ctrl: Control) -> Vector2:
-	return ctrl.rect_global_position + ctrl.rect_size / 2
 
 
 func _get_outline_score_for(geometry) -> OutlineScore:
@@ -104,6 +102,9 @@ func _update_combo(combo):
 	combo_label.text = str(combo) + "x"
 
 
+func _on_geometry_missed():
+	camera.shake()
+
 func _on_HealthBar_zero_health():
 	game_over.show()
 	final_score.text = "Final Score: %s" % ScoreManager.score
@@ -113,3 +114,7 @@ func _on_HealthBar_zero_health():
 func _on_Retry_pressed():
 	logger.info("Restart game")
 	_start_game()
+
+
+func _on_HealthBar_health_changed(health):
+	logger.info("Shake")
