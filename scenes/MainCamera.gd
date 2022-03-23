@@ -1,9 +1,10 @@
 class_name MainCamera extends Camera2D
 
+export var shake_amount = 8.0
+
 onready var default_offset = offset
 onready var shake_timer := $Timer
 
-var shake_amount = 5.0
 var screen_shake = false
 
 func _process(delta):

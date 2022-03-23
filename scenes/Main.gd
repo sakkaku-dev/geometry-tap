@@ -48,7 +48,7 @@ func _get_close_enough_geometry() -> Geometry:
 	return null
 
 
-func _get_outline_for_direction(dir: Vector2) -> Control:
+func _get_outline_for_direction(dir: Vector2) -> Outline:
 	for child in outlines.get_children():
 		var child_pos_dir = outlines.global_position.direction_to(child.global_position)
 		var dir_unit = dir.normalized()
@@ -83,6 +83,7 @@ func _on_InputReader_swipe(left):
 					logger.debug("Correct match: %s" % score_type)
 					ScoreManager.increase_score(score_type)
 					score_type_label.update_score(score_type)
+					matching_outline.emit(ScoreManager.get_color(score_type))
 				else:
 					logger.debug("Outline matched but did not score")
 			else:

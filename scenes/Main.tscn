@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/geometry/GeometrySpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/InputReader.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Main.gd" type="Script" id=3]
-[ext_resource path="res://scenes/square_outline.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Outline.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/circle_outline.png" type="Texture" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
 [ext_resource path="res://scenes/health/HealthBar.tscn" type="PackedScene" id=7]
@@ -29,14 +29,6 @@ parent_path = NodePath("../Geometries")
 
 [node name="Outlines" type="Node2D" parent="GeometrySpawner"]
 position = Vector2( 0, 1600 )
-
-[node name="Square" type="Sprite" parent="GeometrySpawner/Outlines"]
-position = Vector2( -300, 0 )
-texture = ExtResource( 4 )
-
-[node name="Circle" type="Sprite" parent="GeometrySpawner/Outlines"]
-position = Vector2( 300, 0 )
-texture = ExtResource( 5 )
 
 [node name="OutlineScores" type="Node2D" parent="GeometrySpawner/Outlines"]
 
@@ -79,6 +71,16 @@ rect_min_size = Vector2( 2000, 300 )
 size_flags_horizontal = 3
 color = Color( 0, 0, 0, 0.156863 )
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Square" parent="GeometrySpawner/Outlines" instance=ExtResource( 4 )]
+position = Vector2( -300, 0 )
+
+[node name="Circle" parent="GeometrySpawner/Outlines" instance=ExtResource( 4 )]
+position = Vector2( 300, 0 )
+texture = ExtResource( 5 )
 
 [node name="InputReader" type="Node" parent="."]
 script = ExtResource( 2 )

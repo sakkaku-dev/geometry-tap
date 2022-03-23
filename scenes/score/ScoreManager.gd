@@ -10,8 +10,23 @@ enum ScoreType {
 	OK,
 }
 
+const SCORE_DATA = {
+	ScoreType.PERFECT: {"text": "Perfect", "color": Color.red},
+	ScoreType.GOOD: {"text": "Good", "color": Color.green},
+	ScoreType.OK: {"text": "OK", "color": Color.yellow},
+}
+
 var score = 0
 var combo = 0
+
+
+func get_color(score: int) -> Color:
+	return SCORE_DATA[score]["color"]
+	
+	
+func get_text(score: int) -> String:
+	return SCORE_DATA[score]["text"]
+
 
 func reset_score() -> void:
 	score = 0

@@ -26,7 +26,7 @@ func _ready():
 
 
 func _on_score_updated(score: int) -> void:
-	new_speed = min(2000, initial_speed + max(1, score / 10))
+	new_speed = min(2000, initial_speed + max(1, score / 10.0))
 	spawn_time = max(1 / (speed / (initial_speed * 1.0)), 0.5)
 	logger.debug("Setting new speed and time: %s / %ss" % [new_speed, spawn_time])
 
