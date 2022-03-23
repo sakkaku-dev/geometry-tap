@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/geometry/GeometrySpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/InputReader.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/score/OutlineScore.gd" type="Script" id=9]
 [ext_resource path="res://theme/jackeyfont.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://scenes/MainCamera.gd" type="Script" id=11]
+[ext_resource path="res://scenes/HitBorder.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -93,6 +94,8 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HitBorder" parent="CanvasLayer/Control" instance=ExtResource( 12 )]
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
 anchor_right = 1.0

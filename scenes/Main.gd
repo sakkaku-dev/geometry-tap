@@ -7,6 +7,7 @@ onready var combo_label: Label = $CanvasLayer/Control/TopBar/HBoxContainer/VBoxC
 onready var geometries: Node2D = $Geometries
 onready var spawner: GeometrySpawner = $GeometrySpawner
 onready var health_bar: HealthBar = $CanvasLayer/Control/TopBar/HBoxContainer/HealthBar
+onready var hit_border: HitBorder = $CanvasLayer/Control/HitBorder
 
 onready var camera: MainCamera = $Camera2D
 onready var outlines: Node2D = $GeometrySpawner/Outlines
@@ -105,6 +106,7 @@ func _update_combo(combo):
 
 func _on_geometry_missed():
 	camera.shake()
+	hit_border.hit()
 
 func _on_HealthBar_zero_health():
 	game_over.show()
@@ -115,7 +117,3 @@ func _on_HealthBar_zero_health():
 func _on_Retry_pressed():
 	logger.info("Restart game")
 	_start_game()
-
-
-func _on_HealthBar_health_changed(health):
-	logger.info("Shake")
