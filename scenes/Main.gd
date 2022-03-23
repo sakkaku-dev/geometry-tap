@@ -108,6 +108,7 @@ func _on_geometry_missed():
 	camera.shake()
 	hit_border.hit()
 
+
 func _on_HealthBar_zero_health():
 	game_over.show()
 	final_score.text = "Final Score: %s" % ScoreManager.score
