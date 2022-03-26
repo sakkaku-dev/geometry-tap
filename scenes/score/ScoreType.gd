@@ -1,7 +1,5 @@
 class_name ScoreType extends Label
 
-onready var timer := $Timer
-onready var tween := $Tween
 
 func _ready():
 	hide()

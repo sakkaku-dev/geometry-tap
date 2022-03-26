@@ -1,4 +1,13 @@
 body {
-    font-family: url(jackeyfont.ttf);
-    font-size: 64;
+  font-family: url(jackeyfont.tres);
+  //   font-size: 64; // Doesn't work?
+}
+
+Button {
+  color: #fff;
+  background: none;
+}
+
+VBoxContainer {
+  gap: 20;
 }

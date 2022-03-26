@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
+"base": "Label",
+"class": "FinalScore",
+"language": "GDScript",
+"path": "res://scenes/gui/FinalScore.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Geometry",
 "language": "GDScript",
@@ -39,10 +44,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/health/HealthBar.gd"
 }, {
-"base": "TextureRect",
+"base": "Reference",
 "class": "HitBorder",
 "language": "GDScript",
-"path": "res://scenes/HitBorder.gd"
+"path": "res://scenes/gui/HitBorder.gd"
 }, {
 "base": "Node",
 "class": "InputReader",
@@ -58,6 +63,11 @@ _global_script_classes=[ {
 "class": "MainCamera",
 "language": "GDScript",
 "path": "res://scenes/MainCamera.gd"
+}, {
+"base": "Node",
+"class": "MoveEffect",
+"language": "GDScript",
+"path": "res://src/effect/MoveEffect.gd"
 }, {
 "base": "Reference",
 "class": "OptParse",
@@ -103,6 +113,7 @@ _global_script_class_icons={
 "ArgumentParser": "",
 "CSSParser": "",
 "CSSSimplifier": "",
+"FinalScore": "",
 "Geometry": "",
 "GeometrySpawner": "",
 "HealthBar": "",
@@ -110,6 +121,7 @@ _global_script_class_icons={
 "InputReader": "",
 "Logger": "",
 "MainCamera": "",
+"MoveEffect": "",
 "OptParse": "",
 "Options": "",
 "Outline": "",

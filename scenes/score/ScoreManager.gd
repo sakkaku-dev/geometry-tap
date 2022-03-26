@@ -19,6 +19,7 @@ const SCORE_DATA = {
 var score = 0
 var combo = 0
 
+var scores_count = {}
 
 func get_color(score: int) -> Color:
 	return SCORE_DATA[score]["color"]
@@ -31,6 +32,13 @@ func get_text(score: int) -> String:
 func reset_score() -> void:
 	score = 0
 	combo = 0
+	scores_count = {
+		null: 0,
+		ScoreType.PERFECT: 0,
+		ScoreType.GOOD: 0,
+		ScoreType.OK: 0
+	}
+	
 	emit_signal("score_updated", score)
 	emit_signal("combo_updated", combo)
 
@@ -40,6 +48,8 @@ func increase_score(type: int = ScoreType.OK) -> void:
 		score_amount *= 3
 	if type == ScoreType.PERFECT:
 		score_amount *= 5
+		
+	scores_count[type] += 1
 	
 	combo += 1
 	score += score_amount * combo
@@ -49,5 +59,6 @@ func increase_score(type: int = ScoreType.OK) -> void:
 
 func missed() -> void:
 	combo = 0
+	scores_count[null] += 1
 	emit_signal("geometry_missed")
 	emit_signal("combo_updated", combo)

@@ -14,7 +14,6 @@ onready var outlines: Node2D = $GeometrySpawner/Outlines
 onready var outline_scores: Node2D = $GeometrySpawner/Outlines/OutlineScores
 
 onready var game_over: Control = $CanvasLayer/Control/GameOver
-onready var final_score: Label = $CanvasLayer/Control/GameOver/CenterContainer/VBoxContainer/FinalScore
 
 var logger = Logger.new("Main")
 
@@ -111,10 +110,9 @@ func _on_geometry_missed():
 
 func _on_HealthBar_zero_health():
 	game_over.show()
-	final_score.text = "Final Score: %s" % ScoreManager.score
 	get_tree().paused = true
 
 
-func _on_Retry_pressed():
+func _on_GameOver_play_again():
 	logger.info("Restart game")
 	_start_game()
