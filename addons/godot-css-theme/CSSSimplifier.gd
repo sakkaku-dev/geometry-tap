@@ -28,14 +28,6 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					)
 					new_props[mapped_prop] = props["color"]
 
-				if props.has("background"):
-					var value = props["background"]
-					if value == "none":
-						new_props[style_type] = "Empty"
-					else:
-						new_props[style_type] = "Flat"
-						new_props[style_prefix + "bg-color"] = value
-
 				if props.has("padding"):
 					if not new_props.has(style_type):
 						new_props[style_type] = "Empty"
@@ -64,8 +56,26 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 				if props.has("gap"):
 					new_props["--const-separation"] = props["gap"]
 
+				if props.has("background"):
+					var value = props["background"]
+					print(value)
+					var is_none = value == "none"
+
+					if not new_props.has(style_type):
+						new_props[style_type] = "Empty" if is_none else "Flat"
+
+					if new_props[style_type] == "Flat":
+						var color = "Color(0, 0, 0, 0)" if is_none else value
+						new_props[style_prefix + "bg-color"] = color
+
+					# if value == "none":
+					# 	new_props[style_type] = "Empty"
+					# else:
+					# 	new_props[style_type] = "Flat"
+
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 
+	print(values)
 	return Stylesheet.new(values, stylesheet.get_css_file())
 
 

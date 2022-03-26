@@ -8,6 +8,9 @@ onready var total_score := $CenterContainer/VBoxContainer/Scores/TotalScore
 onready var show_tween := $ShowTween
 onready var hide_tween := $HideTween
 
+func _ready():
+	.hide()
+
 func show():
 	.show()
 	for child in scores.get_children():

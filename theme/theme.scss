@@ -3,9 +3,18 @@ body {
   //   font-size: 64; // Doesn't work?
 }
 
-Button {
-  color: #fff;
+Button,
+Button:hover,
+Button:pressed,
+Button:focused,
+Button:disabled {
+  color: #999;
   background: none;
+  border-width: 0;
+}
+
+Button:hover {
+  color: Color(1.5, 1.5, 1.5, 1);
 }
 
 VBoxContainer {
