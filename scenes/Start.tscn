@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/ThemeOverride.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Start.gd" type="Script" id=2]
+[ext_resource path="res://src/effect/MoveEffect.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Main.tscn" type="PackedScene" id=4]
+
+[node name="Start" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+main_scene = ExtResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 316.0
+margin_top = 845.0
+margin_right = 763.0
+margin_bottom = 1075.0
+custom_constants/separation = 100
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+self_modulate = Color( 1.2, 1.2, 1.2, 1 )
+margin_right = 447.0
+margin_bottom = 65.0
+text = "Geometry Tap"
+align = 1
+script = ExtResource( 1 )
+relative_font_size = 1.5
+
+[node name="Start" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 165.0
+margin_right = 447.0
+margin_bottom = 230.0
+text = "Tap to start"
+align = 1
+
+[node name="MoveIn" type="Tween" parent="."]
+
+[node name="MoveIn" type="Node" parent="MoveIn"]
+script = ExtResource( 3 )
+start_offset = Vector2( 0, -50 )
+node_paths = [ NodePath("../..") ]
+
+[node name="MoveOut" type="Tween" parent="."]
+
+[node name="MoveOut" type="Node" parent="MoveOut"]
+script = ExtResource( 3 )
+start_offset = Vector2( 0, 50 )
+reverse = true
+node_paths = [ NodePath("../..") ]
+
+[connection signal="tween_all_completed" from="MoveOut" to="." method="_on_MoveOut_tween_all_completed"]

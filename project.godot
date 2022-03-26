@@ -135,13 +135,14 @@ _global_script_class_icons={
 [application]
 
 config/name="geometry-tap"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Start.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
 
 ScoreManager="*res://scenes/score/ScoreManager.gd"
+GlobalWorldEnvironment="*res://scenes/WorldEnvironment.tscn"
 
 [display]
 

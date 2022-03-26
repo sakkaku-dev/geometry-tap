@@ -14,10 +14,12 @@ onready var outlines: Node2D = $GeometrySpawner/Outlines
 onready var outline_scores: Node2D = $GeometrySpawner/Outlines/OutlineScores
 
 onready var game_over: Control = $CanvasLayer/Control/GameOver
+onready var show_outlines: Tween = $ShowOutlines
 
 var logger = Logger.new("Main")
 
 func _ready():
+	show_outlines.start()
 	_start_game()
 	ScoreManager.connect("score_updated", self, "_update_score")
 	ScoreManager.connect("combo_updated", self, "_update_combo")
