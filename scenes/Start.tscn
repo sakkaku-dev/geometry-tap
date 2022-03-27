@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/ThemeOverride.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Start.gd" type="Script" id=2]
 [ext_resource path="res://src/effect/MoveEffect.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Main.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/effect/TweenEffect.gd" type="Script" id=5]
 
 [node name="Start" type="Control"]
 anchor_right = 1.0
@@ -48,6 +49,7 @@ text = "Tap to start"
 align = 1
 
 [node name="MoveIn" type="Tween" parent="."]
+script = ExtResource( 5 )
 
 [node name="MoveIn" type="Node" parent="MoveIn"]
 script = ExtResource( 3 )
@@ -55,6 +57,7 @@ node_paths = [ NodePath("../..") ]
 start_offset = Vector2( 0, -50 )
 
 [node name="MoveOut" type="Tween" parent="."]
+script = ExtResource( 5 )
 
 [node name="MoveOut" type="Node" parent="MoveOut"]
 script = ExtResource( 3 )

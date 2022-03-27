@@ -7,17 +7,8 @@ export var set_initial = true
 
 export(Array, NodePath) var node_paths: Array
 
-onready var tween: Tween = _get_tween(self)
-
 var transition = Tween.TRANS_LINEAR
 var ease_type = Tween.EASE_IN_OUT
-
-func _get_tween(node: Node):
-	var parent = node.get_parent()
-	if parent is Tween:
-		return parent
-	if parent:
-		return _get_tween(parent)
 
 func get_nodes() -> Array:
 	var result = []
@@ -25,7 +16,7 @@ func get_nodes() -> Array:
 		result.append(get_node(node_path))
 	return result
 
-func interpolate_all(property, start_value):
+func interpolate_all(tween: Tween, property: String, start_value):
 	for node in get_nodes():
 		var start = node.get(start_value) if start_value is String else start_value
 		var end = node.get(property)
@@ -40,3 +31,6 @@ func interpolate_all(property, start_value):
 		
 		if set_initial:
 			node.set(property, initial)
+
+func apply_tween(tween: Tween):
+	pass

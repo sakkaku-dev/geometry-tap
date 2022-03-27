@@ -2,7 +2,7 @@ class_name MoveEffect extends Effect
 
 export var start_offset = Vector2.LEFT
 
-func _ready():
+func apply_tween(tween: Tween):
 	for node in get_nodes():
 		var property = "rect_global_position" if node is Control else "global_position" 
 		var start = node.get(property) + start_offset

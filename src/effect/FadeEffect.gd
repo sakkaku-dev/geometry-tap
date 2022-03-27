@@ -1,4 +1,4 @@
 class_name FadeEffect extends Effect
 
-func _ready():
-	interpolate_all("modulate", Color.transparent)
+func apply_tween(tween: Tween):
+	interpolate_all(tween, "modulate", Color.transparent)

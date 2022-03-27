@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/gui/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/FinalScore.gd" type="Script" id=2]
 [ext_resource path="res://src/effect/MoveEffect.gd" type="Script" id=3]
+[ext_resource path="res://src/effect/TweenEffect.gd" type="Script" id=4]
 
 [node name="GameOver" type="Control"]
 pause_mode = 2
@@ -89,6 +90,7 @@ margin_bottom = 695.0
 text = "Play Again"
 
 [node name="ShowTween" type="Tween" parent="."]
+script = ExtResource( 4 )
 
 [node name="MoveEffect" type="Node" parent="ShowTween"]
 script = ExtResource( 3 )
@@ -96,6 +98,7 @@ node_paths = [ NodePath("../../CenterContainer") ]
 start_offset = Vector2( -40, 0 )
 
 [node name="HideTween" type="Tween" parent="."]
+script = ExtResource( 4 )
 
 [node name="MoveEffect" type="Node" parent="HideTween"]
 script = ExtResource( 3 )
