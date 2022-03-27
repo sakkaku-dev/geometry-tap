@@ -31,9 +31,10 @@ script = ExtResource( 4 )
 
 [node name="FadeEffect" type="Node" parent="Exit"]
 script = ExtResource( 5 )
-delay = 1.0
+delay = 0.5
 duration = 1.0
 reverse = true
+set_initial = false
 node_paths = [ NodePath("../..") ]
 
 [connection signal="tween_all_completed" from="Enter" to="." method="_on_Enter_tween_all_completed"]

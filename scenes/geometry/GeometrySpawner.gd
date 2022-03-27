@@ -22,6 +22,8 @@ var random = RandomNumberGenerator.new()
 var logger = Logger.new("GeometrySpawner")
 
 func _ready():
+	randomize()
+	random.randomize()
 	ScoreManager.connect("score_updated", self, "_on_score_updated")
 
 
