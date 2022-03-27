@@ -35,7 +35,7 @@ jobs:
           env.ANDROID_KEYSTORE &&
           env.ANDROID_KEYSTORE_USER &&
           env.ANDROID_KEYSTORE_PW
-        run: |
+        run: >
           echo $ANDROID_KEYSTORE | base64 --decode > ./release.keystore
           sed 's@keystore/release=".*"@keystore/release="'./release.keystore'"@g' -i export_presets.cfg
           sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
