@@ -6,6 +6,9 @@ func _ready():
 	_apply()
 	
 func start():
+	if is_active():
+		return
+	
 	if call_count > 0:
 		_apply()
 	call_count += 1
