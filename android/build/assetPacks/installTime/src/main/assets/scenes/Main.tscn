@@ -1,0 +1,176 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/geometry/GeometrySpawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/InputReader.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Main.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Outline.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/circle_outline.png" type="Texture" id=5]
+[ext_resource path="res://src/effect/MoveEffect.gd" type="Script" id=6]
+[ext_resource path="res://scenes/health/HealthBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/score/ScoreType.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/score/OutlineScore.gd" type="Script" id=9]
+[ext_resource path="res://src/effect/TweenEffect.gd" type="Script" id=10]
+[ext_resource path="res://scenes/MainCamera.gd" type="Script" id=11]
+[ext_resource path="res://scenes/gui/HitBorder.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/gui/GameOver.tscn" type="PackedScene" id=13]
+
+[node name="Main" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="ShowOutlines" type="Tween" parent="."]
+script = ExtResource( 10 )
+
+[node name="MoveLeft" type="Node" parent="ShowOutlines"]
+script = ExtResource( 6 )
+node_paths = [ NodePath("../../GeometrySpawner/Outlines/Square") ]
+start_offset = Vector2( 200, 0 )
+
+[node name="MoveRight" type="Node" parent="ShowOutlines"]
+script = ExtResource( 6 )
+node_paths = [ NodePath("../../GeometrySpawner/Outlines/Circle") ]
+start_offset = Vector2( -200, 0 )
+
+[node name="Geometries" type="Node2D" parent="."]
+pause_mode = 1
+
+[node name="GeometrySpawner" parent="." instance=ExtResource( 1 )]
+pause_mode = 1
+position = Vector2( 540, 50 )
+parent_path = NodePath("../Geometries")
+
+[node name="Outlines" type="Node2D" parent="GeometrySpawner"]
+position = Vector2( 0, 1600 )
+
+[node name="OutlineScores" type="Node2D" parent="GeometrySpawner/Outlines"]
+
+[node name="OutlinePerfect" type="ColorRect" parent="GeometrySpawner/Outlines/OutlineScores"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1000.0
+margin_top = -15.0
+margin_right = 1000.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 2000, 30 )
+color = Color( 0, 0, 0, 0.156863 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+score = 0
+
+[node name="OutlineGood" type="ColorRect" parent="GeometrySpawner/Outlines/OutlineScores"]
+margin_left = -1000.0
+margin_top = -50.0
+margin_right = 1000.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 2000, 100 )
+color = Color( 0, 0, 0, 0.156863 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+score = 1
+
+[node name="OutlineOK" type="ColorRect" parent="GeometrySpawner/Outlines/OutlineScores"]
+margin_left = -1000.0
+margin_top = -150.0
+margin_right = 1000.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 2000, 300 )
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 0.156863 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Square" parent="GeometrySpawner/Outlines" instance=ExtResource( 4 )]
+position = Vector2( -300, 0 )
+
+[node name="Circle" parent="GeometrySpawner/Outlines" instance=ExtResource( 4 )]
+position = Vector2( 300, 0 )
+texture = ExtResource( 5 )
+
+[node name="InputReader" type="Node" parent="."]
+pause_mode = 1
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HitBorder" parent="CanvasLayer/Control" instance=ExtResource( 12 )]
+margin_right = 1080.0
+margin_bottom = 1920.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScoreType" parent="CanvasLayer/Control/CenterContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 885.0
+margin_right = 1080.0
+margin_bottom = 1035.0
+
+[node name="TopBar" type="MarginContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/TopBar"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1060.0
+margin_bottom = 85.0
+
+[node name="HealthBar" parent="CanvasLayer/Control/TopBar/HBoxContainer" instance=ExtResource( 7 )]
+margin_right = 0.0
+margin_bottom = 65.0
+
+[node name="Control" type="Control" parent="CanvasLayer/Control/TopBar/HBoxContainer"]
+margin_left = 4.0
+margin_right = 999.0
+margin_bottom = 65.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/TopBar/HBoxContainer"]
+margin_left = 1003.0
+margin_right = 1040.0
+margin_bottom = 65.0
+
+[node name="Score" type="Label" parent="CanvasLayer/Control/TopBar/HBoxContainer/VBoxContainer"]
+margin_right = 37.0
+margin_bottom = 65.0
+text = "0"
+align = 2
+
+[node name="GameOver" parent="CanvasLayer/Control" instance=ExtResource( 13 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 540, 960 )
+current = true
+script = ExtResource( 11 )
+
+[node name="Timer" type="Timer" parent="Camera2D"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="swipe" from="InputReader" to="." method="_on_InputReader_swipe"]
+[connection signal="zero_health" from="CanvasLayer/Control/TopBar/HBoxContainer/HealthBar" to="." method="_on_HealthBar_zero_health"]
+[connection signal="play_again" from="CanvasLayer/Control/GameOver" to="." method="_on_GameOver_play_again"]
+[connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]

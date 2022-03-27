@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/ThemeOverride.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Start.gd" type="Script" id=2]
+[ext_resource path="res://src/effect/MoveEffect.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Main.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/effect/TweenEffect.gd" type="Script" id=5]
+
+[node name="Start" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+main_scene = ExtResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 316.0
+margin_top = 762.0
+margin_right = 763.0
+margin_bottom = 1157.0
+custom_constants/separation = 100
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+self_modulate = Color( 1.2, 1.2, 1.2, 1 )
+margin_right = 447.0
+margin_bottom = 65.0
+text = "Geometry Tap"
+align = 1
+script = ExtResource( 1 )
+relative_font_size = 1.5
+
+[node name="HighScore" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 165.0
+margin_right = 447.0
+margin_bottom = 230.0
+align = 1
+
+[node name="Start" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 330.0
+margin_right = 447.0
+margin_bottom = 395.0
+text = "Tap to start"
+align = 1
+
+[node name="MoveIn" type="Tween" parent="."]
+script = ExtResource( 5 )
+
+[node name="MoveIn" type="Node" parent="MoveIn"]
+script = ExtResource( 3 )
+node_paths = [ NodePath("../..") ]
+start_offset = Vector2( 0, -50 )
+
+[node name="MoveOut" type="Tween" parent="."]
+script = ExtResource( 5 )
+
+[node name="MoveOut" type="Node" parent="MoveOut"]
+script = ExtResource( 3 )
+reverse = true
+set_initial = false
+node_paths = [ NodePath("../..") ]
+start_offset = Vector2( 0, 50 )
+
+[connection signal="tween_all_completed" from="MoveOut" to="." method="_on_MoveOut_tween_all_completed"]

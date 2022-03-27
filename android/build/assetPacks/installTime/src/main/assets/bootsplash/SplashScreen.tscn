@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://bootsplash/SplashScreen.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Start.tscn" type="PackedScene" id=2]
+[ext_resource path="res://bootsplash/portrait.png" type="Texture" id=3]
+[ext_resource path="res://src/effect/TweenEffect.gd" type="Script" id=4]
+[ext_resource path="res://src/effect/FadeEffect.gd" type="Script" id=5]
+
+[node name="SplashScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+next_screen = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="Enter" type="Tween" parent="."]
+script = ExtResource( 4 )
+
+[node name="FadeEffect" type="Node" parent="Enter"]
+script = ExtResource( 5 )
+delay = 0.5
+duration = 1.0
+node_paths = [ NodePath("../../TextureRect") ]
+
+[node name="Exit" type="Tween" parent="."]
+script = ExtResource( 4 )
+
+[node name="FadeEffect" type="Node" parent="Exit"]
+script = ExtResource( 5 )
+delay = 0.5
+duration = 1.0
+reverse = true
+set_initial = false
+node_paths = [ NodePath("../..") ]
+
+[connection signal="tween_all_completed" from="Enter" to="." method="_on_Enter_tween_all_completed"]
+[connection signal="tween_all_completed" from="Exit" to="." method="_on_Exit_tween_all_completed"]

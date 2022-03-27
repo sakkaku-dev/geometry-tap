@@ -3,6 +3,6 @@
 
 *.keystore
 
-build/
+/build/
 *.css*
 *.*~
