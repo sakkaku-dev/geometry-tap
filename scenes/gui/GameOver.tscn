@@ -9,9 +9,6 @@ pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -30,9 +27,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 360.0
-margin_top = 655.0
+margin_top = 612.0
 margin_right = 720.0
-margin_bottom = 1265.0
+margin_bottom = 1307.0
 custom_constants/separation = 80
 
 [node name="GameOver" type="Label" parent="CenterContainer/VBoxContainer"]
@@ -43,7 +40,7 @@ text = "Game Over"
 [node name="Scores" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
 margin_top = 145.0
 margin_right = 360.0
-margin_bottom = 465.0
+margin_bottom = 550.0
 
 [node name="TotalScore" type="Label" parent="CenterContainer/VBoxContainer/Scores"]
 margin_right = 360.0
@@ -79,10 +76,16 @@ margin_bottom = 320.0
 text = "Final Score"
 script = ExtResource( 2 )
 
-[node name="Retry" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 545.0
+[node name="Combo" type="Label" parent="CenterContainer/VBoxContainer/Scores"]
+margin_top = 340.0
 margin_right = 360.0
-margin_bottom = 610.0
+margin_bottom = 405.0
+text = "Max Combo"
+
+[node name="Retry" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 630.0
+margin_right = 360.0
+margin_bottom = 695.0
 text = "Play Again"
 
 [node name="ShowTween" type="Tween" parent="."]

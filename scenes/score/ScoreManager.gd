@@ -20,6 +20,7 @@ var score = 0
 var combo = 0
 
 var scores_count = {}
+var max_combo = 0
 
 func get_color(score: int) -> Color:
 	return SCORE_DATA[score]["color"]
@@ -52,7 +53,9 @@ func increase_score(type: int = ScoreType.OK) -> void:
 	scores_count[type] += 1
 	
 	combo += 1
+	max_combo = max(combo, max_combo)
 	score += score_amount * combo
+
 	emit_signal("score_updated", score)
 	emit_signal("combo_updated", combo)
 

@@ -4,6 +4,7 @@ signal play_again()
 
 onready var scores := $CenterContainer/VBoxContainer/Scores
 onready var total_score := $CenterContainer/VBoxContainer/Scores/TotalScore
+onready var max_combo := $CenterContainer/VBoxContainer/Scores/Combo
 
 onready var show_tween := $ShowTween
 onready var hide_tween := $HideTween
@@ -17,6 +18,7 @@ func show():
 		child.show()
 		
 	total_score.text = "Final Score: %s" % ScoreManager.score
+	max_combo.text = "Max Combo: %sx" % ScoreManager.max_combo
 	show_tween.start()
 
 
