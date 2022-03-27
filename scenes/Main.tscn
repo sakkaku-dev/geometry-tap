@@ -21,13 +21,13 @@ script = ExtResource( 3 )
 
 [node name="MoveLeft" type="Node" parent="ShowOutlines"]
 script = ExtResource( 6 )
-start_offset = Vector2( 200, 0 )
 node_paths = [ NodePath("../../GeometrySpawner/Outlines/Square") ]
+start_offset = Vector2( 200, 0 )
 
 [node name="MoveRight" type="Node" parent="ShowOutlines"]
 script = ExtResource( 6 )
-start_offset = Vector2( -200, 0 )
 node_paths = [ NodePath("../../GeometrySpawner/Outlines/Circle") ]
+start_offset = Vector2( -200, 0 )
 
 [node name="Geometries" type="Node2D" parent="."]
 pause_mode = 1
@@ -114,6 +114,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ScoreType" parent="CanvasLayer/Control/CenterContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 885.0
 margin_right = 1080.0
 margin_bottom = 1035.0

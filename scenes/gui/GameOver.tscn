@@ -92,16 +92,16 @@ text = "Play Again"
 
 [node name="MoveEffect" type="Node" parent="ShowTween"]
 script = ExtResource( 3 )
-start_offset = Vector2( -40, 0 )
 node_paths = [ NodePath("../../CenterContainer") ]
+start_offset = Vector2( -40, 0 )
 
 [node name="HideTween" type="Tween" parent="."]
 
 [node name="MoveEffect" type="Node" parent="HideTween"]
 script = ExtResource( 3 )
-start_offset = Vector2( 40, 0 )
 reverse = true
 node_paths = [ NodePath("../../CenterContainer") ]
+start_offset = Vector2( 40, 0 )
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Retry" to="." method="_on_Retry_pressed"]
 [connection signal="tween_all_completed" from="HideTween" to="." method="_on_HideTween_tween_all_completed"]

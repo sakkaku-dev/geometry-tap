@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
+"base": "Node",
+"class": "Effect",
+"language": "GDScript",
+"path": "res://src/effect/Effect.gd"
+}, {
+"base": "Effect",
+"class": "FadeEffect",
+"language": "GDScript",
+"path": "res://src/effect/FadeEffect.gd"
+}, {
 "base": "Label",
 "class": "FinalScore",
 "language": "GDScript",
@@ -64,7 +74,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/MainCamera.gd"
 }, {
-"base": "Node",
+"base": "Effect",
 "class": "MoveEffect",
 "language": "GDScript",
 "path": "res://src/effect/MoveEffect.gd"
@@ -113,6 +123,8 @@ _global_script_class_icons={
 "ArgumentParser": "",
 "CSSParser": "",
 "CSSSimplifier": "",
+"Effect": "",
+"FadeEffect": "",
 "FinalScore": "",
 "Geometry": "",
 "GeometrySpawner": "",
@@ -135,7 +147,8 @@ _global_script_class_icons={
 [application]
 
 config/name="geometry-tap"
-run/main_scene="res://scenes/Start.tscn"
+run/main_scene="res://bootsplash/SplashScreen.tscn"
+boot_splash/image="res://bootsplash/light-black.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 

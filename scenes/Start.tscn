@@ -51,15 +51,15 @@ align = 1
 
 [node name="MoveIn" type="Node" parent="MoveIn"]
 script = ExtResource( 3 )
-start_offset = Vector2( 0, -50 )
 node_paths = [ NodePath("../..") ]
+start_offset = Vector2( 0, -50 )
 
 [node name="MoveOut" type="Tween" parent="."]
 
 [node name="MoveOut" type="Node" parent="MoveOut"]
 script = ExtResource( 3 )
-start_offset = Vector2( 0, 50 )
 reverse = true
 node_paths = [ NodePath("../..") ]
+start_offset = Vector2( 0, 50 )
 
 [connection signal="tween_all_completed" from="MoveOut" to="." method="_on_MoveOut_tween_all_completed"]

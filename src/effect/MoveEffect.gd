@@ -1,16 +1,9 @@
-class_name MoveEffect extends Node
+class_name MoveEffect extends Effect
 
 export var start_offset = Vector2.LEFT
-export var duration = 0.5
-export var reverse = false
-
-export(Array, NodePath) var node_paths: Array
-
-onready var tween: Tween = get_parent()
 
 func _ready():
-	for node_path in node_paths:
-		var node = get_node(node_path)
+	for node in get_nodes():
 		var property = "rect_global_position" if node is Control else "global_position" 
 		var start = node.get(property) + start_offset
 		var end = node.get(property)
