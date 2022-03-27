@@ -16,18 +16,13 @@ margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 3 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.141176, 0.141176, 0.141176, 1 )
-
 [node name="Enter" type="Tween" parent="."]
 
 [node name="FadeEffect" type="Node" parent="Enter"]
 script = ExtResource( 5 )
+delay = 0.5
 duration = 1.0
-reverse = true
-node_paths = [ NodePath("../../ColorRect") ]
+node_paths = [ NodePath("../../TextureRect") ]
 
 [node name="Exit" type="Tween" parent="."]
 

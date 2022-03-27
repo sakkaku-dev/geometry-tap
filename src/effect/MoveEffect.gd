@@ -24,4 +24,4 @@ func _ready():
 			
 		if not node is Control:
 			node.set(property, initial_value)
-			node.set("modulate", initial_modulate)
+		node.set("modulate", initial_modulate)
