@@ -4,6 +4,8 @@
 *.keystore
 
 /build/
+/android/build/**/build
+.gradle
 *.css*
 *.*~
 
