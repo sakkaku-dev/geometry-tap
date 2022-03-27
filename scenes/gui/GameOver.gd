@@ -19,6 +19,7 @@ func show():
 		
 	total_score.text = "Final Score: %s" % ScoreManager.score
 	max_combo.text = "Max Combo: %sx" % ScoreManager.max_combo
+	ScoreManager.save_highscore()
 	show_tween.start()
 
 
