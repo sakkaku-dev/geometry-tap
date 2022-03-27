@@ -11,7 +11,7 @@ enum ScoreType {
 }
 
 const SCORE_DATA = {
-	ScoreType.PERFECT: {"text": "Perfect", "color": Color.red},
+	ScoreType.PERFECT: {"text": "Perfect", "color": Color.purple},
 	ScoreType.GOOD: {"text": "Good", "color": Color.green},
 	ScoreType.OK: {"text": "OK", "color": Color.yellow},
 }
