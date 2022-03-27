@@ -59,6 +59,7 @@ start_offset = Vector2( 0, -50 )
 [node name="MoveOut" type="Node" parent="MoveOut"]
 script = ExtResource( 3 )
 reverse = true
+set_initial = false
 node_paths = [ NodePath("../..") ]
 start_offset = Vector2( 0, 50 )
 

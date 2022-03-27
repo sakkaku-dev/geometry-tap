@@ -13,15 +13,16 @@ func _ready():
 		
 		if reverse:
 			tween.interpolate_property(node, property, end, start, duration)
-			tween.interpolate_property(node, "modulate", node.modulate, Color.transparent, duration)
+			tween.interpolate_property(node, "modulate", Color.white, Color.transparent, duration)
 			initial_value = end
-			initial_modulate = node.modulate
+			initial_modulate = Color.white
 		else:
 			tween.interpolate_property(node, property, start, end, duration)
-			tween.interpolate_property(node, "modulate", Color.transparent, node.modulate, duration)
+			tween.interpolate_property(node, "modulate", Color.transparent, Color.white, duration)
 			initial_value = start
 			initial_modulate = Color.transparent
 			
-		if not node is Control:
-			node.set(property, initial_value)
-		node.set("modulate", initial_modulate)
+		if set_initial:
+			if not node is Control:
+				node.set(property, initial_value)
+			node.set("modulate", initial_modulate)

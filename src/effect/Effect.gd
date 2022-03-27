@@ -3,6 +3,7 @@ class_name Effect extends Node
 export var delay = 0.0
 export var duration = 0.5
 export var reverse = false
+export var set_initial = true
 
 export(Array, NodePath) var node_paths: Array
 
@@ -24,7 +25,7 @@ func get_nodes() -> Array:
 		result.append(get_node(node_path))
 	return result
 
-func interpolate_all(property, start_value, set_initial = true):
+func interpolate_all(property, start_value):
 	for node in get_nodes():
 		var start = node.get(start_value) if start_value is String else start_value
 		var end = node.get(property)
