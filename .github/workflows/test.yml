@@ -14,5 +14,5 @@ jobs:
       - uses: actions/checkout@v2
         with:
           lfs: true
-      - run: sh scripts/test.sh
+      - run: sh scripts/ci/test.sh
         timeout-minutes: 5
