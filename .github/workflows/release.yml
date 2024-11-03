@@ -75,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release
-          path: build/**/*.aab
+          path: build/**/*.apk
   github-release:
     runs-on: ubuntu-latest
     needs: build-release
