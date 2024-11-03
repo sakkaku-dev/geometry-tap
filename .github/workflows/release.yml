@@ -47,6 +47,7 @@ jobs:
       - name: Set variables
         id: info
         run: |
+          echo "Channel: ${CHANNEL%-*}"
           echo "extension=${CHANNEL#*-}" >> $GITHUB_ENV
       
       - name: Prepare android-aab release
