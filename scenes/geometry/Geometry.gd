@@ -1,4 +1,4 @@
-class_name Geometry extends KinematicBody2D
+class_name GeometryShape extends KinematicBody2D
 
 export var speed = 500
 

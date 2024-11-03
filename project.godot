@@ -40,7 +40,7 @@ _global_script_classes=[ {
 "path": "res://scenes/gui/FinalScore.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Geometry",
+"class": "GeometryShape",
 "language": "GDScript",
 "path": "res://scenes/geometry/Geometry.gd"
 }, {
@@ -54,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/health/HealthBar.gd"
 }, {
-"base": "Reference",
+"base": "TextureRect",
 "class": "HitBorder",
 "language": "GDScript",
 "path": "res://scenes/gui/HitBorder.gd"
@@ -126,7 +126,7 @@ _global_script_class_icons={
 "Effect": "",
 "FadeEffect": "",
 "FinalScore": "",
-"Geometry": "",
+"GeometryShape": "",
 "GeometrySpawner": "",
 "HealthBar": "",
 "HitBorder": "",
@@ -168,11 +168,7 @@ window/stretch/aspect="keep_width"
 [global]
 
 window=false
-
-[gui]
-
-theme/custom="res://theme/theme.tres"
-theme/custom_font="res://theme/jackeyfont.tres"
+android=false
 
 [physics]
 

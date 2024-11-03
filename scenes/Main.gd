@@ -35,7 +35,7 @@ func _start_game():
 	get_tree().paused = false
 
 
-func _get_close_enough_geometry() -> Geometry:
+func _get_close_enough_geometry() -> GeometryShape:
 	var outlines_threshold = 200
 #	var outlines_min = outlines.rect_global_position.y - outlines_threshold
 	var outlines_max = outlines.global_position.y + outlines_threshold

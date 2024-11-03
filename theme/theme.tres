@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=7 format=2]
+[gd_resource type="Theme" load_steps=8 format=2]
 
-[ext_resource path="res://theme/jackeyfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://theme/Geo-Regular.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0 )
@@ -17,8 +17,14 @@ bg_color = Color( 0, 0, 0, 0 )
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 0, 0, 0 )
 
+[sub_resource type="DynamicFont" id=6]
+size = 72
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
 [resource]
-default_font = ExtResource( 1 )
+default_font = SubResource( 6 )
 Button/colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
 Button/colors/font_color_disabled = Color( 0.6, 0.6, 0.6, 1 )
 Button/colors/font_color_focused = Color( 0.6, 0.6, 0.6, 1 )

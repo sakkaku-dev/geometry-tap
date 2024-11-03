@@ -9,7 +9,7 @@ jobs:
   build-release:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.4.2
+      image: barichello/godot-ci:3.6
     strategy:
       matrix:
         # Remove channel if not releasing (Available: win, linux, mac, web, android)
@@ -46,21 +46,21 @@ jobs:
       - name: Build
         run: ./scripts/build-channel.sh $CHANNEL
 
-      - name: Publish Itch
-        if: env.BUTLER_API_KEY && env.GAME && !contains(github.ref, '-pre')
-        shell: bash
-        env:
-          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
-          USER: ${{secrets.ITCHIO_USER}}
-        run: butler push build/$CHANNEL kuma-gee/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
+      # - name: Publish Itch
+      #   if: env.BUTLER_API_KEY && env.GAME && !contains(github.ref, '-pre')
+      #   shell: bash
+      #   env:
+      #     BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+      #     USER: ${{secrets.ITCHIO_USER}}
+      #   run: butler push build/$CHANNEL kuma-gee/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
 
-      - name: Package builds
-        if: |
-          env.CHANNEL != 'android' &&
-          env.CHANNEL != 'mac'
-        run: |
-          cd build
-          mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
+      # - name: Package builds
+      #   if: |
+      #     env.CHANNEL != 'android' &&
+      #     env.CHANNEL != 'mac'
+      #   run: |
+      #     cd build
+      #     mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
 
       # Upload exported build
       - name: Upload artifacts
