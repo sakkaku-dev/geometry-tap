@@ -32,7 +32,7 @@ jobs:
           ANDROID_KEYSTORE_USER: ${{secrets.ANDROID_RELEASE_KEYSTORE_USER}}
           ANDROID_KEYSTORE_PW: ${{secrets.ANDROID_RELEASE_KEYSTORE_PW}}
         if: |
-          env.CHANNEL == 'android' &&
+          startsWith(env.CHANNEL, 'android') &&
           env.ANDROID_KEYSTORE &&
           env.ANDROID_KEYSTORE_USER &&
           env.ANDROID_KEYSTORE_PW
@@ -52,7 +52,7 @@ jobs:
       
       - name: Prepare android-aab release
         if: env.CHANNEL == 'android-aab'
-        run:
+        run: |
           sed 's@export_path=".*"@export_path="build/android/main.aab"@g' -i export_presets.cfg
           sed 's@custom_build/export_format=0@custom_build/export_format=1@g' -i export_presets.cfg
 
@@ -88,7 +88,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release
-          path: build/**/*.${{ env.extension}}
+          path: build/**/*.${{ env.extension }}
 
   github-release:
     runs-on: ubuntu-latest
