@@ -12,3 +12,4 @@ fi
 mkdir -v -p ~/.local/share/godot/templates
 mv /root/.local/share/godot/templates/${VERSION}.stable $TARGET
 echo "Installed templates for Godot $VERSION"
+ls ~/.local/share/godot/templates
