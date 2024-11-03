@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # Remove channel if not releasing (Available: win, linux, mac, web, android)
-        channel: [android]
+        channel: [android-apk, android-aab]
     env:
       GAME: geometry-tap
       CHANNEL: ${{matrix.channel}}
@@ -44,8 +44,20 @@ jobs:
           sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
           sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
 
+      - name: Set variables
+        id: info
+        run: |
+          echo "extension=${CHANNEL#*-}" >> $GITHUB_ENV
+          echo "channel=${CHANNEL%-*}" >> $GITHUB_ENV
+      
+      - name: Prepare android-aab release
+        if: env.CHANNEL == 'android-aab'
+        run:
+          sed 's@export_path=".*"@export_path="build/android/main.aab"@g' -i export_presets.cfg
+          sed 's@custom_build/export_format=0@custom_build/export_format=1@g' -i export_presets.cfg
+
       - name: Build
-        run: ./scripts/build-channel.sh $CHANNEL
+        run: ./scripts/build-channel.sh $channel
 
       # - name: Publish Itch
       #   if: env.BUTLER_API_KEY && env.GAME && !contains(github.ref, '-pre')
@@ -64,19 +76,20 @@ jobs:
       #     mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
 
       # Upload exported build
-      - name: Upload artifacts
-        if: env.CHANNEL != 'android'
-        uses: actions/upload-artifact@v4
-        with:
-          name: release
-          path: build/**/*.zip
+      # - name: Upload artifacts
+      #   if: env.CHANNEL != 'android'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: release
+      #     path: build/**/*.zip
 
       - name: Upload android app bundle
         if: env.CHANNEL == 'android'
         uses: actions/upload-artifact@v4
         with:
           name: release
-          path: build/**/*.apk
+          path: build/**/*.${{ env.extension}}
+
   github-release:
     runs-on: ubuntu-latest
     needs: build-release
@@ -92,3 +105,4 @@ jobs:
           files: |
             **/*.zip
             **/*.apk
+            **/*.aab
