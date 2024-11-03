@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=${GODOT_VERSION:-$1}
+VERSION=$1
 
 TARGET=~/.local/share/godot/templates/${VERSION}.stable
 
@@ -11,3 +11,4 @@ fi
 
 mkdir -v -p ~/.local/share/godot/templates
 mv /root/.local/share/godot/templates/${VERSION}.stable $TARGET
+echo "Installed templates for Godot $VERSION"

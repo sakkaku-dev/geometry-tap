@@ -24,7 +24,7 @@ jobs:
           lfs: true
 
       - name: Setup Templates
-        run: ./scripts/prepare-templates.sh
+        run: ./scripts/prepare-templates.sh $GODOT_VERSION
 
       - name: Prepare android release
         env:
