@@ -49,6 +49,7 @@ jobs:
         run: |
           echo "Channel: ${CHANNEL%-*}"
           echo "extension=${CHANNEL#*-}" >> $GITHUB_ENV
+          echo "actual_channel=${CHANNEL%-*}" >> $GITHUB_ENV
       
       - name: Prepare android-aab release
         if: env.CHANNEL == 'android-aab'
@@ -57,7 +58,7 @@ jobs:
           sed 's@custom_build/export_format=0@custom_build/export_format=1@g' -i export_presets.cfg
 
       - name: Build
-        run: ./scripts/build-channel.sh ${CHANNEL%-*}
+        run: ./scripts/build-channel.sh $actual_channel
 
       # - name: Publish Itch
       #   if: env.BUTLER_API_KEY && env.GAME && !contains(github.ref, '-pre')
