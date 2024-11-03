@@ -9,7 +9,7 @@ jobs:
   build-release:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.4.2
+      image: barichello/godot-ci:3.6
     strategy:
       matrix:
         # Remove channel if not releasing (Available: win, linux, mac, web, android)
@@ -17,7 +17,7 @@ jobs:
     env:
       GAME: geometry-tap
       CHANNEL: ${{matrix.channel}}
-      GODOT_VERSION: 3.4.2
+      GODOT_VERSION: 3.6
     steps:
       - uses: actions/checkout@v4
         with:
@@ -56,6 +56,7 @@ jobs:
         run: |
           sed 's@export_path=".*"@export_path="build/android/main.aab"@g' -i export_presets.cfg
           sed 's@custom_build/export_format=0@custom_build/export_format=1@g' -i export_presets.cfg
+          sed 's@custom_build/custom_build=false@custom_build/custom_build=true@g' -i export_presets.cfg
 
       - name: Build
         run: ./scripts/build-channel.sh $actual_channel
