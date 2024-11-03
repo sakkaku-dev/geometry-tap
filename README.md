@@ -12,3 +12,5 @@ After creating the repository with this template run the following:
 ### Branches
 
 - `master` - base branch with generic configuration
+
+Maybe: https://dova-s.jp/bgm/play20386.html
